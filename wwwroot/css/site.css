@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg: #f4f7f9;
+  --text: #333;
+  --card-bg: #ffffff;
+  --accent: #009ef7;
+}
+
+body.dark-mode {
+  --bg: #121212;
+  --text: #e0e0e0;
+  --card-bg: #1e1e2a;
+  --accent: #2a9df4;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+}
+
+.navbar {
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.8);
+}
+body.dark-mode .navbar {
+  background: rgba(18,18,18,0.8);
+}
+
+.btn-accent {
+  background-color: var(--accent);
+  color: #fff;
+  border-radius: 40px;
+  transition: background 0.3s;
+}
+.btn-accent:hover {
+  background-color: #007acc;
+}
+
+.card {
+  background: var(--card-bg);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+body.dark-mode .card {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.table thead {
+  border-bottom: 2px solid var(--accent);
+}
+.table tbody tr:hover {
+  background: rgba(0,0,0,0.03);
+}

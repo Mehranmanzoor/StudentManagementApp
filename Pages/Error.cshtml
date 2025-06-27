@@ -1,0 +1,19 @@
+﻿@page
+@model StudentManagementApp.Pages.ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<div class="container text-center py-5">
+    <h1 class="display-4 text-danger">Oops! 😢</h1>
+    <p class="lead text-muted">Something went wrong. We're really sorry!</p>
+
+    <div class="alert alert-warning mt-4">
+        <strong>Error Code:</strong> @Model.StatusCode <br />
+        <strong>Message:</strong> @Model.ErrorMessage
+    </div>
+
+    <a asp-page="/Index" class="btn btn-primary mt-3">
+        <i class="bi bi-house"></i> Go Back Home
+    </a>
+</div>

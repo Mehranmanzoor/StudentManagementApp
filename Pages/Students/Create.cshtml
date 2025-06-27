@@ -1,0 +1,40 @@
+@page
+@model StudentManagementApp.Pages.Students.CreateModel
+@{
+    ViewData["Title"] = "Add Student";
+}
+
+<div class="text-light container">
+    <h2 class="mb-4">➕ Add New Student</h2>
+
+    <form method="post" class="row g-3">
+        <div class="col-md-6">
+            <label asp-for="Student.Name" class="form-label"></label>
+            <input asp-for="Student.Name" class="form-control" />
+            <span asp-validation-for="Student.Name" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3">
+            <label asp-for="Student.Age" class="form-label"></label>
+            <input asp-for="Student.Age" class="form-control" />
+            <span asp-validation-for="Student.Age" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3">
+            <label asp-for="Student.Grade" class="form-label"></label>
+            <input asp-for="Student.Grade" class="form-control" />
+            <span asp-validation-for="Student.Grade" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6">
+            <label asp-for="Student.Email" class="form-label"></label>
+            <input asp-for="Student.Email" class="form-control" />
+            <span asp-validation-for="Student.Email" class="text-danger"></span>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-success">Save</button>
+            <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>

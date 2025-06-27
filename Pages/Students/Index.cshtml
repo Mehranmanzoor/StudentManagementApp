@@ -1,0 +1,35 @@
+@page
+@model StudentManagementApp.Pages.Students.IndexModel
+@using StudentManagementApp.Models
+
+@{
+    ViewData["Title"] = "Students";
+}
+
+<div class="container mt-4 text-light">
+    <h1 class="mb-4">Student List</h1>
+    <a class="btn btn-primary mb-3" asp-page="Create">+ Add New Student</a>
+
+    <table class="table table-dark table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>Name</th><th>Age</th><th>Grade</th><th>Email</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model.Students)
+            {
+                <tr>
+                    <td>@student.Name</td>
+                    <td>@student.Age</td>
+                    <td>@student.Grade</td>
+                    <td>@student.Email</td>
+                    <td>
+                        <a asp-page="Edit" asp-route-id="@student.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-page="Delete" asp-route-id="@student.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

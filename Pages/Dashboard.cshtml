@@ -1,0 +1,123 @@
+@page
+@model StudentManagementApp.Pages.DashboardModel
+@using StudentManagementApp.Models
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container py-4 text-light">
+    <h2 class="mb-4">📊 Admin Dashboard</h2>
+
+    <!-- Notifications -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <!-- DASHBOARD WIDGETS -->
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="card bg-dark border-info shadow text-center p-3">
+                <h5>Total Students</h5>
+                <h2 class="text-info">@Model.TotalStudents</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark border-success shadow text-center p-3">
+                <h5>Total Attendance Records</h5>
+                <h2 class="text-success">@Model.TotalAttendance</h2>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card bg-dark border-warning shadow text-center p-3">
+                <h5>Today’s Attendance</h5>
+                <h2 class="text-warning">@Model.TodayAttendance</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTION CARDS -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-6">
+            <div class="card bg-dark border-primary h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Add New Student</h5>
+                    <p class="card-text">Create a new student record in the system.</p>
+                    <a asp-page="/Students/Create" class="btn btn-outline-primary">Add Student</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card bg-dark border-success h-100 shadow">
+                <div class="card-body text-center">
+                    <h5 class="card-title">Manage Students</h5>
+                    <p class="card-text">View, edit, or delete student records.</p>
+                    <a asp-page="/Students/Index" class="btn btn-outline-success">Manage Students</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RECENT STUDENTS -->
+    <h4 class="mb-3">👨‍🎓 Recent Students</h4>
+    <table class="table table-dark table-bordered table-hover">
+        <thead class="table-secondary text-dark">
+            <tr>
+                <th>Name</th><th>Age</th><th>Grade</th><th>Email</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var student in Model.Students)
+            {
+                <tr>
+                    <td>@student.Name</td>
+                    <td>@student.Age</td>
+                    <td>@student.Grade</td>
+                    <td>@student.Email</td>
+                    <td>
+                        <a class="btn btn-sm btn-warning" asp-page="/Students/Edit" asp-route-id="@student.Id">Edit</a>
+                        <a class="btn btn-sm btn-danger" asp-page="/Students/Delete" asp-route-id="@student.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- RECENT ATTENDANCE -->
+    <h4 class="mb-3 mt-5">🕒 Today’s Attendance</h4>
+    <table class="table table-dark table-striped table-bordered">
+        <thead class="table-secondary text-dark">
+            <tr>
+                <th>Student</th>
+                <th>Status</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.TodayRecords.Any())
+            {
+                foreach (var record in Model.TodayRecords)
+                {
+                    <tr>
+                        <td>@record.Student.Name</td>
+                        <td>
+                            <span class="badge bg-@(record.Status == "Present" ? "success" : "danger")">
+                                @record.Status
+                            </span>
+                        </td>
+                        <td>@record.Date.ToShortDateString()</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3" class="text-center text-muted">No attendance marked today.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
